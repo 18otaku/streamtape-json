@@ -1,10 +1,13 @@
 name: Update Streamtape JSON
 
-# Trigger every 30 minutes and manually
+# Trigger every minute and manually
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/1 * * * *"  # every minute
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # suppress Node.js 20 warning
 
 jobs:
   update-json:
@@ -28,3 +31,4 @@ jobs:
           STREAMTAPE_USERNAME: ${{ secrets.STREAMTAPE_USERNAME }}
           STREAMTAPE_PASSWORD: ${{ secrets.STREAMTAPE_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
